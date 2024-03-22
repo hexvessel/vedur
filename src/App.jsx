@@ -33,7 +33,7 @@ function App() {
               <div className="date">{date.toTimeString()}</div>
               <div>latitude: {position[0]}</div>
               <div>longitude: {position[1]}</div>
-              <button onClick={clickHandler} className="button-86">
+              <button onClick={clickHandler} className="button-27">
                 Velja
               </button>
             </>
@@ -63,7 +63,7 @@ function App() {
           <div className="date">{date.toTimeString()}</div>
           <div>latitude: {position[0]}</div>
           <div>longitude: {position[1]}</div>
-          <button onClick={clickHandler} className="button-86">
+          <button onClick={clickHandler} className="button-27">
             Til Baka
           </button>
         </div>
