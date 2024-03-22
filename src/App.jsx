@@ -1,0 +1,76 @@
+import React from "react";
+import { useState } from "react";
+import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "./App.css";
+import Weather from "./components/Weather/Weather.jsx";
+
+const center = [64.182913, -21.164818];
+
+function App() {
+  const [position, setPosition] = useState(null);
+  const [ready, setReady] = useState(false);
+  const date = new Date();
+  const LocationFinderDummy = () => {
+    const map = useMapEvents({
+      click(e) {
+        setPosition([e.latlng.lat, e.latlng.lng]);
+      },
+    });
+    return null;
+  };
+  const clickHandler = () => {
+    setReady((ready) => !ready);
+  };
+
+  if (!ready) {
+    return (
+      <div className="container">
+        <div className="coordinates">
+          {position ? (
+            <>
+              <div className="date">{date.toDateString()}</div>
+              <div className="date">{date.toTimeString()}</div>
+              <div>latitude: {position[0]}</div>
+              <div>longitude: {position[1]}</div>
+              <button onClick={clickHandler} className="button-86">
+                Velja
+              </button>
+            </>
+          ) : (
+            <div>Veldu Hnit</div>
+          )}
+        </div>
+        <MapContainer
+          center={center}
+          zoom={10}
+          style={{ width: "75vw", height: "75vh", borderRadius: "100%" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <LocationFinderDummy />
+        </MapContainer>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <div className="container">
+        <div className="coordinates">
+          <div className="date">{date.toDateString()}</div>
+          <div className="date">{date.toTimeString()}</div>
+          <div>latitude: {position[0]}</div>
+          <div>longitude: {position[1]}</div>
+          <button onClick={clickHandler} className="button-86">
+            Til Baka
+          </button>
+        </div>
+      </div>
+      <Weather lat={position[0]} lng={position[1]} />
+    </div>
+  );
+}
+
+export default App;
