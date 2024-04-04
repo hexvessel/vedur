@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import "../../App.css";
 
 export default function Weather({ lat, lng }) {
   const [data, setData] = useState();
-  const [box, setBox] = useState(true);
+  const [temp2m, setTemp2m] = useState(false);
+  const [rain, setRain] = useState(false);
+  const [wind10, setWind10] = useState(false);
+  const [wind180, setWind180] = useState(false);
+  const [windDir, setWindDir] = useState(false);
+
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=` +
     lat +
@@ -17,11 +21,11 @@ export default function Weather({ lat, lng }) {
   const valueFormatter = (date) =>
     date.getHours() === 0
       ? date.toLocaleDateString("en-EN", {
-          month: "2-digit",
+          month: "short",
           day: "2-digit",
         })
       : date.toLocaleTimeString("en-EN", {
-          hour: "2-digit",
+          hour: "numeric",
         });
 
   useEffect(() => {
@@ -50,11 +54,62 @@ export default function Weather({ lat, lng }) {
       .catch((error) => console.log(error));
   }, []);
 
-  function boxClick() {
-    setBox((box) => !box);
-  }
+  const temp2mCheck = () => {
+    setTemp2m(!temp2m);
+  };
+  const rainCheck = () => {
+    setRain(!rain);
+  };
+  const wind10Check = () => {
+    setWind10(!wind10);
+  };
+  const wind180Check = () => {
+    setWind180(!wind180);
+  };
+  const windDirCheck = () => {
+    setWindDir(!windDir);
+  };
+
   return (
     <div className="chart">
+      <div className="checkBoxes">
+        <label>
+          <input
+            type="checkbox"
+            checked={temp2m}
+            onChange={temp2mCheck}
+          ></input>
+          Temp 2m
+        </label>
+        <label>
+          <input type="checkbox" checked={rain} onChange={rainCheck}></input>
+          Precipitation
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={wind10}
+            onChange={wind10Check}
+          ></input>
+          Wind 10m m/s
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={wind180}
+            onChange={wind180Check}
+          ></input>
+          Wind 180m m/s
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={windDir}
+            onChange={windDirCheck}
+          ></input>
+          Wind Direction
+        </label>
+      </div>
       {data ? (
         <>
           <Box sx={{ width: "100%" }}>
@@ -64,7 +119,7 @@ export default function Weather({ lat, lng }) {
                   data: data.time,
                   scaleType: "time",
                   valueFormatter,
-                  tickMaxStep: 3600 * 1000 * 12,
+                  tickMaxStep: 3600 * 1000 * 6,
                 },
               ]}
               yAxis={[
@@ -72,42 +127,37 @@ export default function Weather({ lat, lng }) {
                 { id: "winddirAxis", scaleType: "linear" },
               ]}
               series={[
-                {
+                temp2m && {
                   data: data.temp,
-                  label: "hiti °C",
                   showMark: false,
                   yAxisKey: "linearAxis",
                   color: "red",
                 },
-                {
+                rain && {
                   data: data.rain,
-                  label: "úrkoma mm",
                   showMark: false,
                   yAxisKey: "linearAxis",
                   color: "yellow",
                 },
-                {
+                wind10 && {
                   data: data.wind10,
-                  label: "vindur 10m m/s",
                   showMark: false,
                   yAxisKey: "linearAxis",
                   color: "green",
                 },
-                {
+                wind180 && {
                   data: data.wind180,
-                  label: "vindur 180m m/s",
                   showMark: false,
                   yAxisKey: "linearAxis",
                   color: "blue",
                 },
-                {
+                windDir && {
                   data: data.winddir,
-                  label: "vindátt",
                   showMark: false,
                   yAxisKey: "winddirAxis",
                   color: "white",
                 },
-              ]}
+              ].filter(Boolean)}
               slotProps={{
                 legend: {
                   labelStyle: {

@@ -26,6 +26,17 @@ function App() {
   if (!ready) {
     return (
       <div className="container">
+        <MapContainer
+          center={center}
+          zoom={10}
+          style={{ width: "100vw", height: "60vh", borderRadius: "30%" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <LocationFinderDummy />
+        </MapContainer>
         <div className="coordinates">
           {position ? (
             <>
@@ -41,34 +52,21 @@ function App() {
             <div>Veldu Hnit</div>
           )}
         </div>
-        <MapContainer
-          center={center}
-          zoom={10}
-          style={{ width: "75vw", height: "75vh", borderRadius: "100%" }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <LocationFinderDummy />
-        </MapContainer>
       </div>
     );
   }
   return (
-    <div>
-      <div className="container">
-        <div className="coordinates">
-          <div className="date">{date.toDateString()}</div>
-          <div className="date">{date.toTimeString()}</div>
-          <div>latitude: {position[0]}</div>
-          <div>longitude: {position[1]}</div>
-          <button onClick={clickHandler} className="button-27">
-            Til Baka
-          </button>
-        </div>
-      </div>
+    <div className="container">
       <Weather lat={position[0]} lng={position[1]} />
+      <div className="coordinates">
+        <div className="date">{date.toDateString()}</div>
+        <div className="date">{date.toTimeString()}</div>
+        <div>latitude: {position[0]}</div>
+        <div>longitude: {position[1]}</div>
+        <button onClick={clickHandler} className="button-27">
+          Til Baka
+        </button>
+      </div>
     </div>
   );
 }
