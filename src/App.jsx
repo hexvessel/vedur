@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./App.css";
 import Weather from "./components/Weather/Weather.jsx";
+import { Analytics } from "@vercel/analytics/react";
 
 const center = [64.182913, -21.164818];
 
@@ -52,6 +53,7 @@ function App() {
             <div>Veldu Hnit</div>
           )}
         </div>
+        <Analytics />
       </div>
     );
   }
@@ -67,6 +69,7 @@ function App() {
           Til Baka
         </button>
       </div>
+      <Analytics />
     </div>
   );
 }
