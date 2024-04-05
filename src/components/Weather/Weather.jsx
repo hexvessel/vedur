@@ -5,7 +5,7 @@ import "../../App.css";
 
 export default function Weather({ lat, lng }) {
   const [data, setData] = useState();
-  const [temp2m, setTemp2m] = useState(false);
+  const [temp2m, setTemp2m] = useState(true);
   const [rain, setRain] = useState(false);
   const [wind10, setWind10] = useState(false);
   const [wind180, setWind180] = useState(false);
