@@ -46,11 +46,11 @@ function App() {
               <div>latitude: {position[0]}</div>
               <div>longitude: {position[1]}</div>
               <button onClick={clickHandler} className="button-27">
-                Velja
+                Pick
               </button>
             </>
           ) : (
-            <div>Veldu Hnit</div>
+            <div>Select Coordinates</div>
           )}
         </div>
         <Analytics />
@@ -66,7 +66,7 @@ function App() {
         <div>latitude: {position[0]}</div>
         <div>longitude: {position[1]}</div>
         <button onClick={clickHandler} className="button-27">
-          Til Baka
+          Back
         </button>
       </div>
       <Analytics />

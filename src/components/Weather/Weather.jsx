@@ -20,13 +20,11 @@ export default function Weather({ lat, lng }) {
 
   const valueFormatter = (date) =>
     date.getHours() === 0
-      ? date.toLocaleDateString("en-EN", {
-          month: "short",
-          day: "2-digit",
+      ? date.toLocaleDateString("en-GB", {
+          month: "numeric",
+          day: "numeric",
         })
-      : date.toLocaleTimeString("en-EN", {
-          hour: "numeric",
-        });
+      : "";
 
   useEffect(() => {
     fetch(url)
