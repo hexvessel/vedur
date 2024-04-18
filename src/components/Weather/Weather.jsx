@@ -24,7 +24,9 @@ export default function Weather({ lat, lng }) {
           month: "numeric",
           day: "numeric",
         })
-      : "";
+      : date.toLocaleDateString("en-GB", {
+          hour: "2-digit",
+        });
 
   useEffect(() => {
     fetch(url)
@@ -76,11 +78,17 @@ export default function Weather({ lat, lng }) {
             type="checkbox"
             checked={temp2m}
             onChange={temp2mCheck}
+            className="temp"
           ></input>
           Temp 2m
         </label>
         <label>
-          <input type="checkbox" checked={rain} onChange={rainCheck}></input>
+          <input
+            type="checkbox"
+            checked={rain}
+            onChange={rainCheck}
+            className="precip"
+          ></input>
           Precipitation
         </label>
         <label>
@@ -88,6 +96,7 @@ export default function Weather({ lat, lng }) {
             type="checkbox"
             checked={wind10}
             onChange={wind10Check}
+            className="wind10m"
           ></input>
           Wind 10m m/s
         </label>
@@ -96,6 +105,7 @@ export default function Weather({ lat, lng }) {
             type="checkbox"
             checked={wind180}
             onChange={wind180Check}
+            className="wind180m"
           ></input>
           Wind 180m m/s
         </label>
@@ -104,6 +114,7 @@ export default function Weather({ lat, lng }) {
             type="checkbox"
             checked={windDir}
             onChange={windDirCheck}
+            className="winddir"
           ></input>
           Wind Direction
         </label>

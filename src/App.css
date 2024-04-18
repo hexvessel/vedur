@@ -40,6 +40,25 @@ label {
   color: #ffffff;
   margin: 2em;
 }
+.temp {
+  accent-color: red;
+}
+
+.precip {
+  accent-color: yellow;
+}
+
+.wind10m {
+  accent-color: green;
+}
+
+.wind180m {
+  accent-color: blue;
+}
+
+.winddir {
+  accent-color: white;
+}
 
 .button-27 {
   appearance: none;
