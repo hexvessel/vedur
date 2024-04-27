@@ -20,11 +20,11 @@ export default function Weather({ lat, lng }) {
 
   const valueFormatter = (date) =>
     date.getHours() === 0
-      ? date.toLocaleDateString("en-GB", {
+      ? date.toLocaleDateString("en-US", {
           month: "numeric",
           day: "numeric",
         })
-      : date.toLocaleDateString("en-GB", {
+      : date.toLocaleDateString("en-US", {
           hour: "2-digit",
         });
 
